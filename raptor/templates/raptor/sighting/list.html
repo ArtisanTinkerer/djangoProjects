@@ -1,0 +1,17 @@
+{% extends "raptor/base.html" %}
+
+{% block title %}My Blog{% endblock %}
+{% block content %}
+    <h1>Raptor Spottings</h1>
+    {% for sighting in sightings %}
+    <h2>
+        <a href="{% url 'raptor:sighting_detail' sighting.id %}">
+        {{ sighting.title }}
+        </a>
+</h2>
+<p class="date">
+Published {{ sighting.publish }} by {{ sighting.spotter }}
+</p>
+{{ sighting.body|truncatewords:30|linebreaks }}
+{% endfor %}
+{% endblock %}

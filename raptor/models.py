@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
@@ -9,6 +10,12 @@ class Sighting(models.Model):
 
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
+    spotter = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name = 'made_sightings'
+    )
+
     body = models.TextField()
     when = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
